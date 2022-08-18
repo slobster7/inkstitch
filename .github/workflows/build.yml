@@ -112,6 +112,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install wheel
           python -m pip install attrdict3
+          python -m pip install requests
 
           python -m pip install git+https://github.com/gtaylor/python-colormath
 
