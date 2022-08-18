@@ -8,10 +8,10 @@
 backports.functools_lru_cache
 wxPython
 networkx
-shapely==1.8.2
+shapely
 lxml
 appdirs
-numpy<=1.17.4
+numpy
 jinja2>2.9
 requests
 colormath
