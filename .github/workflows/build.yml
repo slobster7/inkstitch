@@ -157,7 +157,7 @@ jobs:
         run: |
           brew update
 
-          brew install gtk+3 pkg-config gobject-introspection geos libffi gettext || true
+          brew install gtk+3 pkg-config gobject-introspection libffi gettext || true
 
           export LDFLAGS="-L/usr/local/opt/libffi/lib"
           export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
@@ -175,8 +175,6 @@ jobs:
           pip install -r requirements.txt
           # with --no-binary argument may fix notary issues as well shapely speedups error issue
           pip install -U lxml --no-binary lxml
-          pip uninstall --yes shapely
-          pip install -v -U Shapely==1.8.1 --no-binary Shapely
           pip install pyinstaller
 
           echo "${{ env.pythonLocation }}/bin" >> $GITHUB_PATH
