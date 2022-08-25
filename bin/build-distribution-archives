@@ -48,7 +48,15 @@ if [ "$BUILD" = "osx" ]; then
                         -o runtime \
                         --timestamp \
                         dist/inkstitch.app/Contents/MacOS/inkstitch -v
-        # last signing before packaging
+        # shapely needs to be signed after move to new location
+        /usr/bin/codesign -s "${DEV_IDENT}" \
+                        --deep \
+                        --force \
+                        --entitlements installer_scripts/entitlements.plist \
+                        -o runtime \
+                        --timestamp \
+                        dist/inkstitch.app/Contents/Resources/shapely -v
+         # last signing before packaging               
         /usr/bin/codesign -s "${DEV_IDENT}" \
                         --deep \
                         --force \
