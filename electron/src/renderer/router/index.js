@@ -5,27 +5,27 @@
  * Licensed under the GNU GPL version 3.0 or later.  See the file LICENSE for details.
  *
  */
-
-import Vue from 'vue'
-import Router from 'vue-router'
-
-Vue.use(Router)
-
-export default new Router({
-  routes: [
+import { createWebHashHistory, createRouter } from 'vue-router'
+const routes = [
     {
-      path: '/simulator',
-      name: 'simulator',
-      component: require('@/components/Simulator').default
+        path: '/simulator',
+        name: 'simulator',
+        component: () => import('../components/Simulator.vue')
     },
     {
-      path: '/install',
-      name: 'install',
-      component: require('@/components/InstallPalettes').default
+        path: '/install',
+        name: 'install',
+        component: () => import('../components/InstallPalettes.vue')
     },
     {
-      path: '*',
-      redirect: '/'
-    }
-  ]
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: () => import('../components/NotFound.vue')
+    },
+]
+const router = createRouter({
+    history: createWebHashHistory(),
+    routes
 })
+
+export default router

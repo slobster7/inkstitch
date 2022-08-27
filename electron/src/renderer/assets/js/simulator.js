@@ -5,8 +5,8 @@
  * Licensed under the GNU GPL version 3.0 or later.  See the file LICENSE for details.
  *
  */
-
-const inkStitch = require("../../../lib/api")
+import isServer from '../../../lib/api.js'
+const inkStitch = isServer
 const Mousetrap = require("mousetrap")
 import { SVG } from '@svgdotjs/svg.js'
 require('@svgdotjs/svg.panzoom.js/src/svg.panzoom.js')
@@ -14,10 +14,12 @@ require('@svgdotjs/svg.filter.js')
 const svgpath = require('svgpath')
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import { reactive, toRefs } from 'vue'
 import VueSlider from 'vue-slider-component'
-import 'vue-slider-component/theme/default.css'
-
+import 'vue-slider-component/theme/antd.css'
 const throttle = require('lodash.throttle')
+
+
 
 function SliderMark(command, icon) {
   this.label = ""
@@ -30,6 +32,10 @@ export default {
   components: {
     Loading,
     VueSlider
+  },
+  setup() {
+    const data = reactive({ value: 0 })
+    return toRefs(data)
   },
   data: function () {
     return {
@@ -49,7 +55,6 @@ export default {
       showColorChanges: false,
       showStops: false,
       showNeedlePenetrationPoints: false,
-      renderJumps: true,
       showRealisticPreview: false,
       showCursor: true
     }
@@ -70,10 +75,6 @@ export default {
           npp.hide()
         }
       })
-    },
-    renderJumps() {
-      this.renderedStitch = 1
-      this.renderFrame()
     },
     showRealisticPreview() {
       let animating = this.animating
@@ -296,14 +297,6 @@ export default {
     renderFrame() {
       while (this.renderedStitch < this.currentStitch) {
         this.renderedStitch += 1
-        if (!this.renderJumps && this.stitches[this.renderedStitch].jump){
-          if (this.showRealisticPreview) {
-              this.realisticPaths[this.renderedStitch].hide();
-          } else {
-              this.stitchPaths[this.renderedStitch].hide();
-          }
-          continue;
-        }
         if (this.showRealisticPreview) {
           this.realisticPaths[this.renderedStitch].show()
         } else {

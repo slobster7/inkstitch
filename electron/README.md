@@ -1,6 +1,5 @@
-Electron UI
-===========
+Taken from https://github.com/Jamie-Yang/vue3-boilerplate and modified for Ink/Stitch plugin.
 
-This is the home of the future Electron-based UI.  Currently only the Print extension uses Electron.
+# vue3-boilerplate
 
-For local development, run `yarn` in this directory to install dependencies and build Electron.
+A Vue 3 Starter Boilerplate with Vue Router 4, Webpack 5 and More.

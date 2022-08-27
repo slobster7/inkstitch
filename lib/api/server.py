@@ -18,6 +18,8 @@ from ..utils.json import InkStitchJSONEncoder
 from .install import install
 from .simulator import simulator
 from .stitch_plan import stitch_plan
+# this for electron axios
+from flask_cors import CORS
 
 
 class APIServer(Thread):
@@ -40,6 +42,7 @@ class APIServer(Thread):
         cli.show_server_banner = lambda *x: None
 
         self.app = Flask(__name__)
+        CORS(self.app)
         self.app.json_encoder = InkStitchJSONEncoder
 
         self.app.register_blueprint(simulator, url_prefix="/simulator")

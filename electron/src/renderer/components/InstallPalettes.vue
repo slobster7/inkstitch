@@ -6,79 +6,80 @@
   Licensed under the GNU GPL version 3.0 or later.  See the file LICENSE for details.
 
 -->
-
 <template>
-  <v-dialog max-width="500px" value="true">
-    <v-card v-if="step == 'pick'" key="pick" rounded="lg" :loading="installing" :disabled="installing">
-      <v-card-title>
-        <translate>
-          Install Palettes
-        </translate>
-      </v-card-title>
-      <v-card-text class="text--primary">
-        <translate>Ink/Stitch can install palettes for Inkscape matching the thread colors from popular machine embroidery thread manufacturers.
-        </translate>
-      </v-card-text>
-      <v-file-input class="mb-3 mx-3" webkitdirectory hide-details v-model="path" truncate-length="45"
-                    :label="$gettext('Choose Inkscape directory')">
-      </v-file-input>
-      <v-card-text>
-        <translate>If you are not sure which file path to choose, click on install directly. In most cases Ink/Stitch will guess the correct path.
-        </translate>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text color="primary" v-on:click="install">
-          <v-icon>mdi-palette</v-icon>
-          <translate>Install</translate>
-        </v-btn>
-        <v-btn text color="primary" v-on:click="close">
-          <translate>Cancel</translate>
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-    <v-card v-if="step == 'done'" key="done">
-      <v-card-title>
-        <translate>
-          Installation Completed
-        </translate>
-      </v-card-title>
-      <v-card-text class="text--primary">
-        <translate>
-          Inkscape palettes have been installed. Please restart Inkscape to load the new palettes.
-        </translate>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text color="primary" v-on:click="close">
-          Done
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-    <v-card v-if="step == 'error'" key="error">
-      <v-card-title>
-        <translate>
-          Installation Failed
-        </translate>
-      </v-card-title>
-      <v-card-text class="text--primary">
-        <translate>Inkscape add-on installation failed</translate>
-      </v-card-text>
-      <v-card-text class="text--secondary">
-        {{ error }}
-      </v-card-text>
-      <v-card-actions>
-        <v-btn text color="primary" v-on:click="retry">
-          <translate>Try again</translate>
-        </v-btn>
-        <v-btn text color="primary" v-on:click="close">
-          <translate>Cancel</translate>
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
-</template>
+<!DOCTYPE html>
+<html>
+<title>Install Ink/Stitch Palettes</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<component is="style" scoped>
 
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 80%;
+  border-radius: 5px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.container {
+  padding: 2px 16px;
+}
+</component>
+</head>
+<body>
+
+<h2>{{ $gettext("Install Palettes") }}</h2>
+
+<div class="card" v-if="step == 'pick'" key="pick" rounded="lg" :loading="installing" :disabled="installing">
+  <div class="container">
+        <p class="card-text"><translate>Ink/Stitch can install palettes for Inkscape matching the thread colors from popular machine embroidery thread manufacturers.
+        </translate></p>
+        <label for="installPalattes">Default Inkscape directory:</label>
+        <h2>
+        {{ thisPath }}
+        </h2>
+        <p class="card-text">
+         {{ $gettext("If you are not sure which file path to choose, click on install directly. In most cases Ink/Stitch will guess the correct path.") }}
+        </p>
+
+        <button type="button" v-on:click="install">Install</button>
+        <button type="button" v-on:click="close">Cancel</button>
+  </div>
+</div>
+<div class="card" v-if="step == 'done'" key="done">
+  <div class="container">
+        <p class="card-text"><translate>
+          Installation Completed
+        </translate></p>
+        <p class="card-text"><translate>
+          Inkscape palettes have been installed. Please restart Inkscape to load the new palettes.
+        </translate></p>
+        <button type="button" v-on:click="close">Done</button>
+  </div>
+</div>
+<div class="card"  v-if="step == 'error'" key="error">
+  <div class="container">
+    <p class="card-text"><translate>
+        Installation Failed
+        </translate></p>
+        <p class="card-text"><translate>
+        Inkscape add-on installation failed
+        </translate></p>
+        <p class="card-text">
+        {{ error }}
+        </p>
+        <button type="button" v-on:click="retry"><translate>Try again</translate></button>
+        <button type="button" v-on:click="close">Cancel</button>
+  </div>
+</div>
+</body>
+</html>
+</template>
 <script>
-const inkStitch = require("../../lib/api")
+import isServer from '../../lib/api.js'
+const inkStitch = isServer
 
 export default {
   name: "InstallPalettes",
@@ -87,7 +88,8 @@ export default {
       path: null,
       installing: false,
       step: "pick",
-      error: null
+      error: null,
+      thisPath: null
     }
   },
   methods: {
@@ -113,6 +115,7 @@ export default {
   created: function () {
     inkStitch.get("install/default-path").then(response => {
       this.path = new File([""], response.data, {})
+      this.thisPath = response.data
     })
   }
 }
@@ -121,3 +124,4 @@ export default {
 <style scoped>
 
 </style>
+

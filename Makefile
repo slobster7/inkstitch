@@ -4,7 +4,11 @@ dist: version locales inx
 	bash bin/build-distribution-archives
 
 distclean:
-	rm -rf build dist inx locales artifacts win mac *.spec *.tar.gz *.zip electron/node_modules electron/dist
+	rm -rf build dist inx locales artifacts win mac *.spec *.tar.gz *.zip electron/node_modules electron/dist electron/build/mac electron/build/mac-arm64
+
+distlocal:
+	bash bin/build-check
+	make distclean && make dist
 
 .PHONY: inx
 inx: version locales

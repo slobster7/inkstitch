@@ -378,13 +378,11 @@ $(function() {
   });
 
   $('button.print').click(function() {
-	  var pageSize = $('select#printing-size').find(':selected').text();
-	  electron.ipcRenderer.send('open-pdf', pageSize)
+       window.print();
   });
 
   $('button.save-pdf').click(function() {
-	  var pageSize = $('select#printing-size').find(':selected').text();
-	  electron.ipcRenderer.send('save-pdf', pageSize)
+       window.print();
   });  
   
   $('button.settings').click(function(){

@@ -6,21 +6,23 @@
 -e git+https://gitlab.com/inkscape/extensions.git@e44fdcbe6bcc917ef3a2164eb0c130f7276fb83f#egg=inkex
 
 backports.functools_lru_cache
-wxPython
+wxPython==4.1.1
 networkx
-shapely==1.8.2
+shapely
 lxml
 appdirs
-numpy<=1.17.4
+numpy
 jinja2>2.9
 requests
 colormath
 stringcase
 tinycss2
-flask
+flask==2.0.3
+werkzeug==2.0.3
 fonttools
 trimesh
 scipy
+flask-cors
 
 pywinutils; sys.platform == 'win32'
 pywin32; sys.platform == 'win32'
