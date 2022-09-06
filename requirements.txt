@@ -7,7 +7,7 @@
 
 backports.functools_lru_cache
 https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04/wxPython-4.2.0-cp38-cp38-linux_x86_64.whl ; sys_platform == 'linux'
-wxPython ; sys_platform == 'win32'
+wxPython ; sys_platform == 'darwin'
 wxPython==4.1.1 ; sys_platform == 'win32'
 networkx
 shapely
