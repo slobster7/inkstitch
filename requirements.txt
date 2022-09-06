@@ -6,7 +6,9 @@
 -e git+https://gitlab.com/inkscape/extensions.git@e44fdcbe6bcc917ef3a2164eb0c130f7276fb83f#egg=inkex
 
 backports.functools_lru_cache
-wxPython==4.1.1
+https://extras.wxpython.org/wxPython4/extras/linux/gtk3/ubuntu-20.04/wxPython-4.2.0-cp38-cp38-linux_x86_64.whl ; sys_platform == 'linux'
+wxPython ; sys_platform == 'win32'
+wxPython==4.1.1 ; sys_platform == 'win32'
 networkx
 shapely
 lxml
@@ -24,5 +26,5 @@ trimesh
 scipy
 flask-cors
 
-pywinutils; sys.platform == 'win32'
-pywin32; sys.platform == 'win32'
+pywinutils ; sys_platform == 'win32'
+pywin32 ; sys_platform == 'win32'
