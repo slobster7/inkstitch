@@ -13,11 +13,6 @@ const routes = [
         component: () => import('../components/Simulator.vue')
     },
     {
-        path: '/install',
-        name: 'install',
-        component: () => import('../components/InstallPalettes.vue')
-    },
-    {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: () => import('../components/NotFound.vue')
