@@ -26,9 +26,9 @@ jobs:
         id: pip-cache
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-18.04-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-20.04-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-18.04-pip-
+            ${{ runner.os }}-20.04-pip-
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
