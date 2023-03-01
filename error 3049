@@ -1,0 +1,14 @@
+path3049: error: Error during autofill!  This means that there is a problem with Ink/Stitch.
+
+If you'd like to help us make Ink/Stitch better, please paste this whole message into a new issue at: https://github.com/inkstitch/inkstitch/issues/new
+
+Ink/Stitch Version: v2.2.0 (windows)
+
+
+Traceback (most recent call last):
+  File "lib\elements\fill_stitch.py", line 556, in to_stitch_groups
+  File "lib\elements\fill_stitch.py", line 590, in do_underlay
+  File "lib\debug.py", line 133, in decorated
+  File "lib\stitches\auto_fill.py", line 62, in auto_fill
+  File "lib\stitches\fill.py", line 163, in intersect_region_with_grating
+ZeroDivisionError: float division by zero
